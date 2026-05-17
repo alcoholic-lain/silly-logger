@@ -1,11 +1,11 @@
+import json
 import logging
 import requests
 import threading
 
 URL = "https://lain-log-server.up.railway.app/log"
 
-# terminal colors
-_R = "\033[0m"
+_R      = "\033[0m"
 _CYAN   = "\033[96m"
 _GREEN  = "\033[92m"
 _YELLOW = "\033[93m"
@@ -25,8 +25,7 @@ STYLES = {
 
 class _Formatter(logging.Formatter):
     def format(self, record):
-        level = record.levelname
-        color, emoji = STYLES.get(level, ("", level))
+        color, emoji = STYLES.get(record.levelname, ("", record.levelname))
         record.msg = f"{color}{emoji} {record.msg}{_R}"
         return super().format(record)
 
@@ -50,3 +49,8 @@ class Logger:
     def warn(self, msg, category=None):     self._log.warning(msg);  self._send("WARN",  msg, category)
     def error(self, msg, category=None):    self._log.error(msg);    self._send("ERROR", msg, category)
     def critical(self, msg, category=None): self._log.critical(msg); self._send("CRIT",  msg, category)
+
+    def json(self, data: dict, category=None):
+        """Send a JSON payload silently — no terminal output, dashboard only."""
+        message = json.dumps(data)
+        self._send("INFO", message, category)
