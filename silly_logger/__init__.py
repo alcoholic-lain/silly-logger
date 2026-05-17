@@ -13,11 +13,13 @@ _RED    = "\033[91m"
 _BOLD   = "\033[1m"
 
 STYLES = {
-    "DEBUG": (_CYAN,   ":3"),
-    "INFO":  (_GREEN,  ":>"),
-    "WARN":  (_YELLOW, ":|"),
-    "ERROR": (_RED,    ">:("),
-    "CRIT":  (_BOLD + _RED, "X_X"),
+    "DEBUG":    (_CYAN,        ":3"),
+    "INFO":     (_GREEN,       ":>"),
+    "WARN":     (_YELLOW,      ":|"),
+    "WARNING":  (_YELLOW,      ":|"),
+    "ERROR":    (_RED,         ">:("),
+    "CRIT":     (_BOLD + _RED, "X_X"),
+    "CRITICAL": (_BOLD + _RED, "X_X"),
 }
 
 
